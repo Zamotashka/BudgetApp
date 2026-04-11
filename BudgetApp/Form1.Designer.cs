@@ -181,18 +181,18 @@
 
         #endregion
 
-        private System.Windows.Forms.Label labelDesc;
-        private System.Windows.Forms.TextBox descriptionTextBox;
-        private System.Windows.Forms.Label labelAmount;
-        private System.Windows.Forms.TextBox amountTextBox;
-        private System.Windows.Forms.Label labelType;
-        private System.Windows.Forms.ComboBox typeComboBox;
-        private System.Windows.Forms.Label labelDate;
-        private System.Windows.Forms.DateTimePicker datePicker;
-        private System.Windows.Forms.Button addButton;
-        private System.Windows.Forms.Button updateButton;
-        private System.Windows.Forms.Button removeButton;
-        private System.Windows.Forms.ListBox transactionsListBox;
-        private System.Windows.Forms.Label totalBudgetLabel;
+        public System.Windows.Forms.Label labelDesc;
+        public System.Windows.Forms.TextBox descriptionTextBox;
+        public System.Windows.Forms.Label labelAmount;
+        public System.Windows.Forms.TextBox amountTextBox;
+        public System.Windows.Forms.Label labelType;
+        public System.Windows.Forms.ComboBox typeComboBox;
+        public System.Windows.Forms.Label labelDate;
+        public System.Windows.Forms.DateTimePicker datePicker;
+        public System.Windows.Forms.Button addButton;
+        public System.Windows.Forms.Button updateButton;
+        public System.Windows.Forms.Button removeButton;
+        public System.Windows.Forms.ListBox transactionsListBox;
+        public System.Windows.Forms.Label totalBudgetLabel;
     }
 }

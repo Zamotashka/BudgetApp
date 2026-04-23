@@ -151,6 +151,59 @@ namespace BudgetApp
             }
         }
 
+        private void importButton_Click(object sender, EventArgs e)
+        {
+            using (var dlg = new System.Windows.Forms.OpenFileDialog())
+            {
+                dlg.Title = "Импорт транзакций";
+                dlg.Filter = "Текстовые файлы (*.txt)|*.txt|Все файлы (*.*)|*.*";
+                dlg.DefaultExt = "txt";
+
+                if (dlg.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+                    return;
+
+                try
+                {
+                    _budgetManager.ImportFromFile(dlg.FileName);
+                    RefreshList();
+                    UpdateBudgetLabel();
+                    MessageBox.Show("Транзакции успешно загружены!", "Импорт",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ошибка при импорте: " + ex.Message, "Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void exportButton_Click(object sender, EventArgs e)
+        {
+            using (var dlg = new System.Windows.Forms.SaveFileDialog())
+            {
+                dlg.Title = "Экспорт транзакций";
+                dlg.Filter = "Текстовые файлы (*.txt)|*.txt|Все файлы (*.*)|*.*";
+                dlg.DefaultExt = "txt";
+                dlg.FileName = "transactions_export.txt";
+
+                if (dlg.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+                    return;
+
+                try
+                {
+                    _budgetManager.ExportToFile(dlg.FileName);
+                    MessageBox.Show("Транзакции успешно сохранены!", "Экспорт",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ошибка при экспорте: " + ex.Message, "Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
         // ───── автозаполнение полей при выборе транзакции ─────────────────
 
         private void transactionsListBox_SelectedIndexChanged(object sender, EventArgs e)

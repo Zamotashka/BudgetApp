@@ -15,6 +15,8 @@
 
         private void InitializeComponent()
         {
+            this.importButton = new System.Windows.Forms.Button();
+            this.exportButton = new System.Windows.Forms.Button();
             this.labelDesc = new System.Windows.Forms.Label();
             this.descriptionTextBox = new System.Windows.Forms.TextBox();
             this.labelAmount = new System.Windows.Forms.Label();
@@ -98,38 +100,32 @@
             // 
             // addButton
             // 
-            this.addButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(238)))), ((int)(((byte)(144)))));
-            this.addButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addButton.Location = new System.Drawing.Point(10, 76);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(103, 26);
             this.addButton.TabIndex = 8;
             this.addButton.Text = "Добавить";
-            this.addButton.UseVisualStyleBackColor = false;
+            this.addButton.UseVisualStyleBackColor = true;
             this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
             // updateButton
             // 
-            this.updateButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(216)))), ((int)(((byte)(230)))));
-            this.updateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.updateButton.Location = new System.Drawing.Point(122, 76);
             this.updateButton.Name = "updateButton";
             this.updateButton.Size = new System.Drawing.Size(103, 26);
             this.updateButton.TabIndex = 9;
             this.updateButton.Text = "Обновить";
-            this.updateButton.UseVisualStyleBackColor = false;
+            this.updateButton.UseVisualStyleBackColor = true;
             this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
             // 
             // removeButton
             // 
-            this.removeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(182)))), ((int)(((byte)(193)))));
-            this.removeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.removeButton.Location = new System.Drawing.Point(233, 76);
             this.removeButton.Name = "removeButton";
             this.removeButton.Size = new System.Drawing.Size(103, 26);
             this.removeButton.TabIndex = 10;
             this.removeButton.Text = "Удалить";
-            this.removeButton.UseVisualStyleBackColor = false;
+            this.removeButton.UseVisualStyleBackColor = true;
             this.removeButton.Click += new System.EventHandler(this.removeButton_Click);
             // 
             // transactionsListBox
@@ -145,17 +141,37 @@
             // 
             this.totalBudgetLabel.AutoSize = true;
             this.totalBudgetLabel.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            this.totalBudgetLabel.Location = new System.Drawing.Point(10, 303);
+            this.totalBudgetLabel.Location = new System.Drawing.Point(10, 345);
             this.totalBudgetLabel.Name = "totalBudgetLabel";
             this.totalBudgetLabel.Size = new System.Drawing.Size(197, 20);
             this.totalBudgetLabel.TabIndex = 12;
             this.totalBudgetLabel.Text = "Общий бюджет: 0,00 руб.";
             // 
+            // importButton
+            // 
+            this.importButton.Location = new System.Drawing.Point(10, 308);
+            this.importButton.Name = "importButton";
+            this.importButton.Size = new System.Drawing.Size(146, 26);
+            this.importButton.TabIndex = 13;
+            this.importButton.Text = "Загрузить из файла";
+            this.importButton.UseVisualStyleBackColor = true;
+            this.importButton.Click += new System.EventHandler(this.importButton_Click);
+            // 
+            // exportButton
+            // 
+            this.exportButton.Location = new System.Drawing.Point(165, 308);
+            this.exportButton.Name = "exportButton";
+            this.exportButton.Size = new System.Drawing.Size(146, 26);
+            this.exportButton.TabIndex = 14;
+            this.exportButton.Text = "Сохранить в файл";
+            this.exportButton.UseVisualStyleBackColor = true;
+            this.exportButton.Click += new System.EventHandler(this.exportButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(514, 347);
+            this.ClientSize = new System.Drawing.Size(514, 380);
             this.Controls.Add(this.labelDesc);
             this.Controls.Add(this.descriptionTextBox);
             this.Controls.Add(this.labelAmount);
@@ -169,6 +185,8 @@
             this.Controls.Add(this.removeButton);
             this.Controls.Add(this.transactionsListBox);
             this.Controls.Add(this.totalBudgetLabel);
+            this.Controls.Add(this.importButton);
+            this.Controls.Add(this.exportButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Form1";
@@ -192,6 +210,8 @@
         public System.Windows.Forms.Button addButton;
         public System.Windows.Forms.Button updateButton;
         public System.Windows.Forms.Button removeButton;
+        public System.Windows.Forms.Button importButton;
+        public System.Windows.Forms.Button exportButton;
         public System.Windows.Forms.ListBox transactionsListBox;
         public System.Windows.Forms.Label totalBudgetLabel;
     }

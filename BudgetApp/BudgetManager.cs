@@ -57,6 +57,39 @@ namespace BudgetApp
             SaveTransactions();
         }
 
+        public void ExportToFile(string path)
+        {
+            File.WriteAllLines(path, Transactions.Select(t =>
+                $"{t.Description}|{t.Amount.ToString(CultureInfo.InvariantCulture)}|{(int)t.Type}|{t.Date:yyyy-MM-dd HH:mm:ss}"));
+        }
+
+        public void ImportFromFile(string path)
+        {
+            var lines = File.ReadAllLines(path);
+            var imported = new List<Transaction>();
+
+            foreach (var line in lines)
+            {
+                var parts = line.Split('|');
+                if (parts.Length != 4)
+                    continue;
+
+                if (decimal.TryParse(parts[1], NumberStyles.Any,
+                        CultureInfo.InvariantCulture, out decimal amount)
+                    && int.TryParse(parts[2], out int typeInt)
+                    && Enum.IsDefined(typeof(TransactionType), typeInt)
+                    && DateTime.TryParse(parts[3], out DateTime date))
+                {
+                    imported.Add(new Transaction(
+                        parts[0], amount, (TransactionType)typeInt, date));
+                }
+            }
+
+            Transactions.Clear();
+            Transactions.AddRange(imported);
+            SaveTransactions();
+        }
+
         private void SaveTransactions()
         {
             File.WriteAllLines(FilePath, Transactions.Select(t =>

@@ -49,7 +49,7 @@ namespace BudgetApp
         }
 
         public void UpdateTransaction(Transaction transaction, string newDescription,
-            decimal newAmount, TransactionType newType)
+            decimal newAmount, TransactionType newType, DateTime newDate)
         {
             if (transaction == null)
                 throw new ArgumentNullException(nameof(transaction));
@@ -57,6 +57,7 @@ namespace BudgetApp
             transaction.Description = newDescription;
             transaction.Amount = newAmount;
             transaction.Type = newType;
+            transaction.Date = newDate;
             SaveTransactions();
         }
 

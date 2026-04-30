@@ -138,8 +138,7 @@ namespace BudgetApp
 
             try
             {
-                _budgetManager.UpdateTransaction(
-                    transaction, description, amount, GetSelectedType());
+                _budgetManager.UpdateTransaction(transaction, description, amount, GetSelectedType(), datePicker.Value);
                 ClearInputs();
                 RefreshList();
                 UpdateBudgetLabel();

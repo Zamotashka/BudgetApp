@@ -29,8 +29,11 @@ namespace BudgetApp
 
         public void AddTransaction(Transaction transaction)
         {
-            if (transaction == null)
-                throw new ArgumentNullException(nameof(transaction));
+            decimal newBalance = TotalBudget +
+                (transaction.Type == TransactionType.Доход ? transaction.Amount : -transaction.Amount);
+
+            if (newBalance < 0)
+                throw new InvalidOperationException("Бюджет не может быть отрицательным!");
 
             Transactions.Add(transaction);
             SaveTransactions();

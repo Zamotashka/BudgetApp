@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BudgetManagerTests.cs" />
+    <Compile Include="CategoryTests.cs" />
     <Compile Include="Form1Tests.cs" />
     <Compile Include="TransactionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -30,7 +30,31 @@
             this.removeButton = new System.Windows.Forms.Button();
             this.transactionsListBox = new System.Windows.Forms.ListBox();
             this.totalBudgetLabel = new System.Windows.Forms.Label();
+            this.categoryTextBox = new System.Windows.Forms.TextBox();
+            this.filterButton = new System.Windows.Forms.Button();
+            this.statsButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
+            // 
+            // importButton
+            // 
+            this.importButton.Location = new System.Drawing.Point(10, 353);
+            this.importButton.Name = "importButton";
+            this.importButton.Size = new System.Drawing.Size(146, 26);
+            this.importButton.TabIndex = 13;
+            this.importButton.Text = "Загрузить из файла";
+            this.importButton.UseVisualStyleBackColor = true;
+            this.importButton.Click += new System.EventHandler(this.importButton_Click);
+            // 
+            // exportButton
+            // 
+            this.exportButton.Location = new System.Drawing.Point(165, 353);
+            this.exportButton.Name = "exportButton";
+            this.exportButton.Size = new System.Drawing.Size(146, 26);
+            this.exportButton.TabIndex = 14;
+            this.exportButton.Text = "Сохранить в файл";
+            this.exportButton.UseVisualStyleBackColor = true;
+            this.exportButton.Click += new System.EventHandler(this.exportButton_Click);
             // 
             // labelDesc
             // 
@@ -59,7 +83,7 @@
             // 
             // amountTextBox
             // 
-            this.amountTextBox.Location = new System.Drawing.Point(274, 10);
+            this.amountTextBox.Location = new System.Drawing.Point(281, 10);
             this.amountTextBox.Name = "amountTextBox";
             this.amountTextBox.Size = new System.Drawing.Size(86, 20);
             this.amountTextBox.TabIndex = 3;
@@ -131,9 +155,9 @@
             // transactionsListBox
             // 
             this.transactionsListBox.FormattingEnabled = true;
-            this.transactionsListBox.Location = new System.Drawing.Point(10, 117);
+            this.transactionsListBox.Location = new System.Drawing.Point(10, 123);
             this.transactionsListBox.Name = "transactionsListBox";
-            this.transactionsListBox.Size = new System.Drawing.Size(489, 173);
+            this.transactionsListBox.Size = new System.Drawing.Size(590, 212);
             this.transactionsListBox.TabIndex = 11;
             this.transactionsListBox.SelectedIndexChanged += new System.EventHandler(this.transactionsListBox_SelectedIndexChanged);
             // 
@@ -141,37 +165,52 @@
             // 
             this.totalBudgetLabel.AutoSize = true;
             this.totalBudgetLabel.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            this.totalBudgetLabel.Location = new System.Drawing.Point(10, 345);
+            this.totalBudgetLabel.Location = new System.Drawing.Point(10, 390);
             this.totalBudgetLabel.Name = "totalBudgetLabel";
             this.totalBudgetLabel.Size = new System.Drawing.Size(197, 20);
             this.totalBudgetLabel.TabIndex = 12;
             this.totalBudgetLabel.Text = "Общий бюджет: 0,00 руб.";
             // 
-            // importButton
+            // categoryTextBox
             // 
-            this.importButton.Location = new System.Drawing.Point(10, 308);
-            this.importButton.Name = "importButton";
-            this.importButton.Size = new System.Drawing.Size(146, 26);
-            this.importButton.TabIndex = 13;
-            this.importButton.Text = "Загрузить из файла";
-            this.importButton.UseVisualStyleBackColor = true;
-            this.importButton.Click += new System.EventHandler(this.importButton_Click);
+            this.categoryTextBox.Location = new System.Drawing.Point(450, 10);
+            this.categoryTextBox.Name = "categoryTextBox";
+            this.categoryTextBox.Size = new System.Drawing.Size(150, 20);
+            this.categoryTextBox.TabIndex = 15;
             // 
-            // exportButton
+            // filterButton
             // 
-            this.exportButton.Location = new System.Drawing.Point(165, 308);
-            this.exportButton.Name = "exportButton";
-            this.exportButton.Size = new System.Drawing.Size(146, 26);
-            this.exportButton.TabIndex = 14;
-            this.exportButton.Text = "Сохранить в файл";
-            this.exportButton.UseVisualStyleBackColor = true;
-            this.exportButton.Click += new System.EventHandler(this.exportButton_Click);
+            this.filterButton.Location = new System.Drawing.Point(429, 45);
+            this.filterButton.Name = "filterButton";
+            this.filterButton.Size = new System.Drawing.Size(75, 26);
+            this.filterButton.TabIndex = 16;
+            this.filterButton.Text = "Фильтр";
+            this.filterButton.Click += new System.EventHandler(this.filterButton_Click);
+            // 
+            // statsButton
+            // 
+            this.statsButton.Location = new System.Drawing.Point(510, 45);
+            this.statsButton.Name = "statsButton";
+            this.statsButton.Size = new System.Drawing.Size(90, 26);
+            this.statsButton.TabIndex = 17;
+            this.statsButton.Text = "Статистика";
+            this.statsButton.Click += new System.EventHandler(this.statsButton_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(384, 13);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(60, 13);
+            this.label1.TabIndex = 18;
+            this.label1.Text = "Категория";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(514, 380);
+            this.ClientSize = new System.Drawing.Size(620, 433);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.labelDesc);
             this.Controls.Add(this.descriptionTextBox);
             this.Controls.Add(this.labelAmount);
@@ -187,11 +226,14 @@
             this.Controls.Add(this.totalBudgetLabel);
             this.Controls.Add(this.importButton);
             this.Controls.Add(this.exportButton);
+            this.Controls.Add(this.categoryTextBox);
+            this.Controls.Add(this.filterButton);
+            this.Controls.Add(this.statsButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Управление бюджетом — Прокуров";
+            this.Text = "Управление бюджетом — Проскуров";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -207,6 +249,9 @@
         public System.Windows.Forms.ComboBox typeComboBox;
         public System.Windows.Forms.Label labelDate;
         public System.Windows.Forms.DateTimePicker datePicker;
+        private System.Windows.Forms.TextBox categoryTextBox;
+        private System.Windows.Forms.Button filterButton;
+        private System.Windows.Forms.Button statsButton;
         public System.Windows.Forms.Button addButton;
         public System.Windows.Forms.Button updateButton;
         public System.Windows.Forms.Button removeButton;
@@ -214,5 +259,6 @@
         public System.Windows.Forms.Button exportButton;
         public System.Windows.Forms.ListBox transactionsListBox;
         public System.Windows.Forms.Label totalBudgetLabel;
+        private System.Windows.Forms.Label label1;
     }
 }

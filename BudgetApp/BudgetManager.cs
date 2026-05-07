@@ -48,6 +48,15 @@ namespace BudgetApp
             SaveTransactions();
         }
 
+        public Dictionary<string, decimal> GetCategoryStats()
+        {
+            return Transactions
+                .GroupBy(t => t.Category)
+                .ToDictionary(
+                g => g.Key,
+                g => g.Sum(t => t.Type == TransactionType.Доход ? t.Amount : -t.Amount));
+        }
+
         public void UpdateTransaction(Transaction transaction, string newDescription,
             decimal newAmount, TransactionType newType, DateTime newDate)
         {
@@ -64,7 +73,7 @@ namespace BudgetApp
         public void ExportToFile(string path)
         {
             File.WriteAllLines(path, Transactions.Select(t =>
-                $"{t.Description}|{t.Amount.ToString(CultureInfo.InvariantCulture)}|{(int)t.Type}|{t.Date:yyyy-MM-dd HH:mm:ss}"));
+                $"{t.Description}|{t.Amount.ToString(CultureInfo.InvariantCulture)}|{(int)t.Type}|{t.Date:yyyy-MM-dd HH:mm:ss}|{t.Category}"));
         }
 
         public void ImportFromFile(string path)
@@ -97,7 +106,7 @@ namespace BudgetApp
         private void SaveTransactions()
         {
             File.WriteAllLines(FilePath, Transactions.Select(t =>
-                $"{t.Description}|{t.Amount.ToString(CultureInfo.InvariantCulture)}|{(int)t.Type}|{t.Date:yyyy-MM-dd HH:mm:ss}"));
+                $"{t.Description}|{t.Amount.ToString(CultureInfo.InvariantCulture)}|{(int)t.Type}|{t.Date:yyyy-MM-dd HH:mm:ss}|{t.Category}"));
         }
 
         private void LoadTransactions()
@@ -109,7 +118,7 @@ namespace BudgetApp
             foreach (var line in lines)
             {
                 var parts = line.Split('|');
-                if (parts.Length != 4)
+                if (parts.Length < 4)
                     continue;
 
                 if (decimal.TryParse(parts[1], NumberStyles.Any,
@@ -118,8 +127,9 @@ namespace BudgetApp
                     && Enum.IsDefined(typeof(TransactionType), typeInt)
                     && DateTime.TryParse(parts[3], out DateTime date))
                 {
+                    string category = parts.Length >= 5 ? parts[4] : "Без категории" ;
                     Transactions.Add(new Transaction(
-                        parts[0], amount, (TransactionType)typeInt, date));
+                        parts[0], amount, (TransactionType)typeInt, date, category));
                 }
             }
         }

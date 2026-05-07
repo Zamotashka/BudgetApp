@@ -100,7 +100,7 @@ namespace BudgetApp.Tests
             var transaction = new Transaction("Старое", 1000, TransactionType.Доход, DateTime.Now);
             _manager.AddTransaction(transaction);
             // Act
-            _manager.UpdateTransaction(transaction, "Новое", 1000, TransactionType.Доход);
+            _manager.UpdateTransaction(transaction, "Новое", 1000, TransactionType.Доход, DateTime.Today);
             // Assert
             Assert.AreEqual("Новое", transaction.Description);
         }
@@ -112,7 +112,7 @@ namespace BudgetApp.Tests
             var transaction = new Transaction("Зарплата", 1000, TransactionType.Доход, DateTime.Now);
             _manager.AddTransaction(transaction);
             // Act
-            _manager.UpdateTransaction(transaction, "Зарплата", 5000, TransactionType.Доход);
+            _manager.UpdateTransaction(transaction, "Зарплата", 5000, TransactionType.Доход, DateTime.Today);
             // Assert
             Assert.AreEqual(5000, transaction.Amount);
         }
@@ -124,7 +124,7 @@ namespace BudgetApp.Tests
             var transaction = new Transaction("Перевод", 1000, TransactionType.Доход, DateTime.Now);
             _manager.AddTransaction(transaction);
             // Act
-            _manager.UpdateTransaction(transaction, "Перевод", 1000, TransactionType.Расход);
+            _manager.UpdateTransaction(transaction, "Перевод", 1000, TransactionType.Расход, DateTime.Today);
             // Assert
             Assert.AreEqual(TransactionType.Расход, transaction.Type);
         }
@@ -150,7 +150,7 @@ namespace BudgetApp.Tests
         public void UpdateTransaction_NullThrows()
         {
             // Act
-            _manager.UpdateTransaction(null, "Тест", 1000, TransactionType.Доход);
+            _manager.UpdateTransaction(null, "Тест", 1000, TransactionType.Доход, DateTime.Today);
         }
     }
 }

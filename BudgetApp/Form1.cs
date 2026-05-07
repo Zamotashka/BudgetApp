@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace BudgetApp
@@ -71,6 +72,7 @@ namespace BudgetApp
         {
             descriptionTextBox.Clear();
             amountTextBox.Clear();
+            categoryTextBox.Clear();
         }
 
         // ───── обработчики кнопок ─────────────────────────────────────────
@@ -81,7 +83,8 @@ namespace BudgetApp
                 return;
 
             var transaction = new Transaction(
-                description, amount, GetSelectedType(), datePicker.Value);
+                description, amount, GetSelectedType(), datePicker.Value,
+                categoryTextBox.Text.Trim());
 
             try
             {
@@ -215,6 +218,36 @@ namespace BudgetApp
             amountTextBox.Text = t.Amount.ToString();
             typeComboBox.SelectedIndex = (int)t.Type;
             datePicker.Value = t.Date;
+            categoryTextBox.Text = t.Category;
         }
+        private void filterButton_Click(object sender, EventArgs e)
+        {
+            string filter = categoryTextBox.Text.Trim();
+            if (string.IsNullOrEmpty(filter))
+            {
+                RefreshList();
+                return;
+            }
+            transactionsListBox.Items.Clear();
+            foreach (var t in _budgetManager.Transactions
+                .Where(t => t.Category.Equals(filter, StringComparison.OrdinalIgnoreCase)))
+                transactionsListBox.Items.Add(t.ToString());
+        }
+        private void statsButton_Click(Object sender, EventArgs e)
+        {
+            var stats = _budgetManager.GetCategoryStats();
+            if (stats.Count == 0)
+            {
+                MessageBox.Show("Нет транзакций для анализа.", "Статистика",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            var sb = new System.Text.StringBuilder();
+            foreach (var kv in stats)
+                sb.AppendLine($"{kv.Key}: {kv.Value:F2} руб.");
+            MessageBox.Show(sb.ToString(), "Статистика по категориям",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
     }
 }
